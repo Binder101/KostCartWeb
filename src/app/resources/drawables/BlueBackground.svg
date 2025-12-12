@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" preserveAspectRatio="none">
+  <defs>
+    <!-- Base dark-to-navy sweep -->
+    <linearGradient id="bg" x1="0%" y1="65%" x2="85%" y2="10%">
+      <stop offset="0%"   stop-color="#000001"/>
+      <stop offset="45%"  stop-color="#020309"/>
+      <stop offset="75%"  stop-color="#050917"/>
+      <stop offset="100%" stop-color="#0b142c"/>
+    </linearGradient>
+
+    <!-- Subtle top-right blue glow -->
+    <radialGradient id="glowTR" cx="78%" cy="18%" r="65%">
+      <stop offset="0%" stop-color="#0b142c" stop-opacity="0.85"/>
+      <stop offset="40%" stop-color="#050917" stop-opacity="0.45"/>
+      <stop offset="75%" stop-color="#020309" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000001" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Diagonal soft band (very subtle) -->
+    <radialGradient id="band" cx="60%" cy="5%" r="95%">
+      <stop offset="0%" stop-color="#0b142c" stop-opacity="0.55"/>
+      <stop offset="35%" stop-color="#050917" stop-opacity="0.22"/>
+      <stop offset="70%" stop-color="#020309" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000001" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Paint order matters -->
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <rect width="1440" height="900" fill="url(#band)"/>
+  <rect width="1440" height="900" fill="url(#glowTR)"/>
+</svg>
