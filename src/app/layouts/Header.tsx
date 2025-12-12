@@ -1,19 +1,25 @@
 export default function Header(){
     return(
-        <div>
-            <div className="flex items-center justify-between h-16 px-32 w-full text-[#F6F7D7]">
-                <div className="text-2xl  font-[Outfit]">KostCart</div>
-                <div className="flex items-center justify-between space-x-10 font-semibold">
-                    <div className="p-2 hover:text-amber-100">Home</div>
-                    <div className="p-2 hover:text-amber-100">Blog</div>
-                    <div className="p-2 hover:text-amber-100">Solutions</div>
-                    <div className="p-2 hover:text-amber-100">About Us</div>
-                    <div className="p-2 hover:text-amber-100">Contact Us</div>
+        <header className="fixed inset-x-0 top-0 z-30">
+            <div className="flex items-center justify-between h-16 px-4 sm:h-20 sm:px-8 lg:h-24 lg:px-32 w-full text-[#F6F7D7] fixed">
+                <div className="flex items-center">
+                    <div className="bg-[url('/drawables/kc_logo_light.svg')] bg-cover bg-no-repeat w-8 h-8 me-3 sm:w-10 sm:h-10 lg:h-12 lg:w-12"></div>
+                    <div className="bg-[url('/drawables/kc_light_name.svg')] bg-cover bg-no-repeat w-24 h-6 sm:w-22 sm:h-5 lg:w-30 lg:h-7"></div>
                 </div>
+                <nav className="hidden items-center space-x-6 font-semibold md:flex lg:space-x-10">
+                    <button className="p-2 hover:text-amber-100 cursor-pointer">Home</button>
+                    <button className="p-2 hover:text-amber-100 cursor-pointer">Blog</button>
+                    <button className="p-2 hover:text-amber-100 cursor-pointer">Solutions</button>
+                    <button className="p-2 hover:text-amber-100 cursor-pointer">About Us</button>
+                    <button className="p-2 hover:text-amber-100 cursor-pointer">Contact Us</button>
+                </nav>
+                <button className="md:hidden p-2 cursor-pointer">
+                    <span className="block h-0.5 w-5 bg-[#F6F7D7] mb-1" />
+                    <span className="block h-0.5 w-5 bg-[#F6F7D7] mb-1" />
+                    <span className="block h-0.5 w-5 bg-[#F6F7D7]" />
+                </button>
             </div>
-            <div
-                className="w-full h-[0.1px] bg-[linear-gradient(135deg,#ffffff_0%,#e5e7eb_33%,#ffffff_66%,#e5e7eb_100%)]">
-            </div>
-        </div>
+            <div className="h-px w-full bg-[linear-gradient(135deg,#ffffff_0%,#e5e7eb_33%,#ffffff_66%,#e5e7eb_100%)]"/>
+        </header>
     )
 }

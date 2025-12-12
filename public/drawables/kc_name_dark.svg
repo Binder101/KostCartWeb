@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-706c9903-518c-4bd7-a182-13454e4b4228" data-name="die line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 579.36 142.2">
+  <defs>
+    <style>
+      .uuid-f2530702-0b5f-45ff-bae6-c60604314637 {
+        letter-spacing: .36em;
+      }
+
+      .uuid-64e3d6f0-e16a-4dce-9d1c-ebe056c7e290 {
+        letter-spacing: 0em;
+      }
+
+      .uuid-31dcf1c6-7a33-4550-ac5e-50aa61b3715d {
+        letter-spacing: -.04em;
+      }
+
+      .uuid-b40419ae-6fe0-4c4e-a3c8-6e73c1af31c0 {
+        stroke-width: 0px;
+      }
+
+      .uuid-b40419ae-6fe0-4c4e-a3c8-6e73c1af31c0, .uuid-d107dcc8-495a-429f-95f1-aa76b24bdcec {
+        fill: #2a286b;
+      }
+
+      .uuid-d107dcc8-495a-429f-95f1-aa76b24bdcec {
+        font-family: Outfit-ExtraBold, Outfit;
+        font-size: 132.09px;
+        font-weight: 700;
+      }
+
+      .uuid-309379ed-09c9-4dec-9af6-b68a782a2920 {
+        letter-spacing: 0em;
+      }
+
+      .uuid-f791b268-9d29-4e37-b8ee-4baab246d159 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <text class="uuid-d107dcc8-495a-429f-95f1-aa76b24bdcec" transform="translate(0 112.87)"><tspan class="uuid-31dcf1c6-7a33-4550-ac5e-50aa61b3715d" x="0" y="0">K</tspan><tspan class="uuid-f791b268-9d29-4e37-b8ee-4baab246d159" x="90.09" y="0">ost</tspan><tspan class="uuid-309379ed-09c9-4dec-9af6-b68a782a2920" x="283.34" y="0">C</tspan><tspan x="373.56" y="0">a</tspan><tspan class="uuid-f2530702-0b5f-45ff-bae6-c60604314637" x="453.21" y="0"> </tspan><tspan class="uuid-64e3d6f0-e16a-4dce-9d1c-ebe056c7e290" x="525.2" y="0">t</tspan></text>
+  <g>
+    <rect class="uuid-b40419ae-6fe0-4c4e-a3c8-6e73c1af31c0" x="454.76" y="48.28" width="64.72" height="19.15"/>
+    <rect class="uuid-b40419ae-6fe0-4c4e-a3c8-6e73c1af31c0" x="454.76" y="19.22" width="64.72" height="18.34"/>
+    <path class="uuid-b40419ae-6fe0-4c4e-a3c8-6e73c1af31c0" d="m468.73,73.65c11.68,0,21.15-8.1,21.15-18.09s-9.47-18.09-21.15-18.09c.12-3.35.24-6.7.36-10.05,2.3-.33,5.35-.52,8.83,0,12.96,1.95,27.79,13.16,28.16,28.14.38,15.18-14.86,30.16-35.18,30.09l-2.17-12Z"/>
+    <polygon class="uuid-b40419ae-6fe0-4c4e-a3c8-6e73c1af31c0" points="519.48 112.76 496.59 112.87 454.76 73.82 477.65 73.7 519.48 112.76"/>
+  </g>
+</svg>
