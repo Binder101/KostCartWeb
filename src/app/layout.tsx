@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[url('/drawables/background1.svg')] h-screen w-screen bg-cover">
+      <body className="bg-linear-to-br from-indigo-900 to to-black to-55% h-screen w-screen bg-cover">
         {children}
       </body>
     </html>
