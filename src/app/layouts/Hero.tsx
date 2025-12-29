@@ -3,7 +3,7 @@ import InfiniteScrollAnimation from "@/app/layouts/InfiniteScrollAnimation";
 
 export default function Hero() {
     return (
-        <section className="relative flex min-h-screen flex-col items-center justify-center overflow-x-hidden  text-slate-100">
+        <section className="relative flex min-h-dvh flex-col pt-6 items-center justify-center overflow-x-hidden overflow-y-auto text-slate-100">
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -top-40 left-1/2 h-120 w-120 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.55)_0,rgba(15,23,42,0)_70%)] blur-3xl" />
             </div>

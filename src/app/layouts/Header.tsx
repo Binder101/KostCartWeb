@@ -1,15 +1,22 @@
 "use client"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Header(){
     const[isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const[isScroll, setIsScroll] = useState<boolean>(false);
     const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const handleNavItemClick = () => {
         setIsMenuOpen(false);
     };
+    useEffect(() => {
+        const onScroll = () => setIsScroll(window.scrollY > 8);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     return(
-        <header className="fixed inset-x-0 top-0 z-30">
+        <header className={`fixed isolate before:absolute before:inset-0 before:-z-10 before:backdrop-blur-xl before:backdrop-saturate-150 before:bg-slate-950/35 inset-x-0 top-0 z-30 ${isScroll ? `bg-slate-950/35 backdrop-blur-xl border-b border-white/10` : `bg-transparent`}`}>
             <div className="flex relative top-0 right-0 items-center justify-between h-16 px-4 sm:h-20 sm:px-8 lg:h-24 lg:px-32 w-full text-[#F6F7D7]">
                 <div className="flex items-center">
                     <div className="bg-[url('/drawables/kc_logo_light.svg')] bg-cover bg-no-repeat w-8 h-8 me-3 sm:w-10 sm:h-10 lg:h-12 lg:w-12"></div>
@@ -18,7 +25,7 @@ export default function Header(){
                 <nav className="hidden  items-center space-x-6 font-semibold md:flex lg:space-x-10">
                     <button className="p-2 hover:text-amber-100 cursor-pointer">Home</button>
                     <button className="p-2 hover:text-amber-100 cursor-pointer">Blog</button>
-                    <button className="p-2 hover:text-amber-100 cursor-pointer">Solutions</button>
+                    <button className="p-2 hover:text-amber-100 cursor-pointer">Products</button>
                     <button className="p-2 hover:text-amber-100 cursor-pointer">About Us</button>
                     <button className="p-2 hover:text-amber-100 cursor-pointer">Contact Us</button>
                 </nav>
@@ -47,7 +54,7 @@ export default function Header(){
                                 onClick={handleNavItemClick}
                                 className="text-center py-3 px-2 text-[#F6F7D7] hover:text-amber-100 hover:bg-white/10 rounded transition-all"
                             >
-                                Solutions
+                                Products
                             </button>
                             <button
                                 onClick={handleNavItemClick}
