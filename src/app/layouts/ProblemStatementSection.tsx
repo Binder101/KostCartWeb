@@ -65,40 +65,40 @@ export default function ProblemStatementSection({
                             payments. Kostcart fixes that — fast, simple, and seamlessly.
                         </p>
 
-                        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            {PAIN_POINTS.map((item, idx) => {
-                                const isLast = idx === PAIN_POINTS.length - 1;
+                        {/*<div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">*/}
+                        {/*    {PAIN_POINTS.map((item, idx) => {*/}
+                        {/*        const isLast = idx === PAIN_POINTS.length - 1;*/}
 
-                                return (
-                                    <div
-                                        key={item.title}
-                                        className={[
-                                            "rounded-2xl p-6",
-                                            "bg-[#171717]",
-                                            "border border-white/10",
-                                            "shadow-[0_0_0_1px_rgba(255,255,255,0.04)]",
-                                            "transition hover:border-white/20 hover:bg-white/[0.06]",
-                                            "min-h-[124px]",
-                                            isLast ? "sm:col-span-2" : "",
-                                        ].join(" ")}
-                                    >
-                                        <div className="text-xl leading-none">{item.icon}</div>
+                        {/*        return (*/}
+                        {/*            <div*/}
+                        {/*                key={item.title}*/}
+                        {/*                className={[*/}
+                        {/*                    "rounded-2xl p-6",*/}
+                        {/*                    "bg-[#171717]",*/}
+                        {/*                    "border border-white/10",*/}
+                        {/*                    "shadow-[0_0_0_1px_rgba(255,255,255,0.04)]",*/}
+                        {/*                    "transition hover:border-white/20 hover:bg-white/[0.06]",*/}
+                        {/*                    "min-h-[124px]",*/}
+                        {/*                    isLast ? "sm:col-span-2" : "",*/}
+                        {/*                ].join(" ")}*/}
+                        {/*            >*/}
+                        {/*                <div className="text-xl leading-none">{item.icon}</div>*/}
 
-                                        <h3 className="mt-3 text-base font-semibold text-white">
-                                            {item.title}
-                                        </h3>
+                        {/*                <h3 className="mt-3 text-base font-semibold text-white">*/}
+                        {/*                    {item.title}*/}
+                        {/*                </h3>*/}
 
-                                        {item.subtitle ? (
-                                            <p className="mt-1 text-sm text-white/55">
-                                                {item.subtitle}
-                                            </p>
-                                        ) : (
-                                            <p className="mt-1 text-sm text-white/55">&nbsp;</p>
-                                        )}
-                                    </div>
-                                );
-                            })}
-                        </div>
+                        {/*                {item.subtitle ? (*/}
+                        {/*                    <p className="mt-1 text-sm text-white/55">*/}
+                        {/*                        {item.subtitle}*/}
+                        {/*                    </p>*/}
+                        {/*                ) : (*/}
+                        {/*                    <p className="mt-1 text-sm text-white/55">&nbsp;</p>*/}
+                        {/*                )}*/}
+                        {/*            </div>*/}
+                        {/*        );*/}
+                        {/*    })}*/}
+                        {/*</div>*/}
                     </div>
 
                     {/* RIGHT: Image */}
