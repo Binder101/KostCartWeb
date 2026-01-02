@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 
 type FormState = {
     name: string;
@@ -23,8 +22,6 @@ function normalizePhone(input: string) {
 }
 
 export default function ContactUsForm() {
-    const router = useRouter();
-
     const [form, setForm] = useState<FormState>({
         name: "",
         restaurantName: "",
@@ -35,6 +32,7 @@ export default function ContactUsForm() {
 
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [submitted, setSubmitted] = useState(false);
 
     const isValid = useMemo(() => {
         const nameOk = form.name.trim().length >= 2;
@@ -59,7 +57,7 @@ export default function ContactUsForm() {
         // Honeypot check
         if (form.companyWebsite.trim().length > 0) {
             // Silently succeed to frustrate bots
-            router.push("/contact/thank-you");
+            setSubmitted(true);
             return;
         }
 
@@ -69,15 +67,19 @@ export default function ContactUsForm() {
         }
 
         setSubmitting(true);
+        setSubmitted(false);
         try {
-            const apiBase = process.env.NEXT_PUBLIC_API_URL;
+            const apiBase =
+                process.env.NEXT_PUBLIC_BASE_API ||
+                process.env.NEXT_PUBLIC_API_URL;
             if (!apiBase) {
                 throw new Error(
-                    "Missing NEXT_PUBLIC_API_URL. Set it in .env.local."
+                    "Missing NEXT_PUBLIC_BASE_API. Set it in .env.local."
                 );
             }
 
-            const res = await fetch(`${apiBase}/api/v1/contact`, {
+            const normalizedBase = apiBase.replace(/\/+$/, "");
+            const res = await fetch(`${normalizedBase}/api/v1/contact`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -98,7 +100,14 @@ export default function ContactUsForm() {
             }
 
             // Success
-            router.push("/contact/thank-you");
+            setSubmitted(true);
+            setForm({
+                name: "",
+                restaurantName: "",
+                city: "",
+                phoneNumber: "",
+                companyWebsite: "",
+            });
         } catch (err: any) {
             setError(err?.message ?? "Failed to submit. Please try again.");
         } finally {
@@ -108,16 +117,16 @@ export default function ContactUsForm() {
 
     return (
         <div className="w-full max-w-xl">
-            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                <h2 className="text-xl font-semibold text-gray-900">Contact Us</h2>
-                <p className="mt-1 text-sm text-gray-600">
+            <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-6 text-slate-100 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] backdrop-blur">
+                <h2 className="text-xl font-semibold text-white">Contact Us</h2>
+                <p className="mt-1 text-sm text-slate-300">
                     Share your details and we’ll reach out soon.
                 </p>
 
                 <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
                     {/* Honeypot (hidden) */}
                     <div className="hidden">
-                        <label className="text-sm font-medium text-gray-700">
+                        <label className="text-sm font-medium text-slate-300">
                             Company Website
                         </label>
                         <input
@@ -129,7 +138,7 @@ export default function ContactUsForm() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-slate-200">
                             Name <span className="text-red-600">*</span>
                         </label>
                         <input
@@ -137,14 +146,14 @@ export default function ContactUsForm() {
                             value={form.name}
                             onChange={(e) => onChange("name", e.target.value)}
                             placeholder="Your full name"
-                            className="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 outline-none ring-0 focus:border-gray-900"
+                            className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 placeholder:text-slate-500 focus:border-blue-400"
                             required
                             minLength={2}
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-slate-200">
                             Restaurant Name <span className="text-red-600">*</span>
                         </label>
                         <input
@@ -152,14 +161,14 @@ export default function ContactUsForm() {
                             value={form.restaurantName}
                             onChange={(e) => onChange("restaurantName", e.target.value)}
                             placeholder="Restaurant / Business name"
-                            className="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 outline-none ring-0 focus:border-gray-900"
+                            className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 placeholder:text-slate-500 focus:border-blue-400"
                             required
                             minLength={2}
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-slate-200">
                             City <span className="text-red-600">*</span>
                         </label>
                         <input
@@ -167,14 +176,14 @@ export default function ContactUsForm() {
                             value={form.city}
                             onChange={(e) => onChange("city", e.target.value)}
                             placeholder="City"
-                            className="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 outline-none ring-0 focus:border-gray-900"
+                            className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 placeholder:text-slate-500 focus:border-blue-400"
                             required
                             minLength={2}
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-slate-200">
                             Phone Number <span className="text-red-600">*</span>
                         </label>
                         <input
@@ -184,32 +193,38 @@ export default function ContactUsForm() {
                                 onChange("phoneNumber", normalizePhone(e.target.value))
                             }
                             placeholder="+91-95**23**67"
-                            className="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 outline-none ring-0 focus:border-gray-900"
+                            className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 placeholder:text-slate-500 focus:border-blue-400"
                             required
                             pattern="^[0-9+\-() ]{7,20}$"
                             minLength={7}
                             maxLength={20}
                         />
-                        <p className="mt-1 text-xs text-gray-500">
+                        <p className="mt-1 text-xs text-slate-400">
                             Allowed: digits, spaces, +, -, parentheses.
                         </p>
                     </div>
 
                     {error && (
-                        <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                        <div className="rounded-xl border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-200">
                             {error}
+                        </div>
+                    )}
+
+                    {submitted && !error && (
+                        <div className="rounded-xl border border-emerald-400/40 bg-emerald-400/10 p-3 text-sm text-emerald-100">
+                            Thanks! We’ve received your details and will reach out soon.
                         </div>
                     )}
 
                     <button
                         type="submit"
                         disabled={submitting}
-                        className="inline-flex w-full items-center justify-center rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+                        className="inline-flex w-full items-center justify-center rounded-xl bg-[#2563ff] px-4 py-2.5 text-sm font-medium text-white shadow-[0_0_30px_rgba(37,99,255,0.35)] transition hover:bg-[#1d4fe0] disabled:cursor-not-allowed disabled:opacity-60"
                     >
                         {submitting ? "Submitting..." : "Submit"}
                     </button>
 
-                    <p className="text-center text-xs text-gray-500">
+                    <p className="text-center text-xs text-slate-400">
                         By submitting, your details will be emailed to our team.
                     </p>
                 </form>

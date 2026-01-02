@@ -33,7 +33,7 @@ export default function KeyFeaturesSection({
     return (
         <section
             id={id}
-            className={`relative overflow-hidden bg-black py-20 sm:py-24 ${className}`}
+            className={`relative overflow-hidden bg-black py-20 sm:py-24 scroll-mt-28 ${className}`}
         >
             {/* Background glow to match hero */}
             <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
