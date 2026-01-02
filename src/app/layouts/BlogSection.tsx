@@ -787,16 +787,16 @@ export default function BlogSection() {
 
             {activePost && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8"
+                    className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 px-4 py-6 sm:items-center sm:py-8"
                     onClick={() => setActivePost(null)}
                     role="dialog"
                     aria-modal="true"
                 >
                     <div
-                        className="w-full max-w-3xl rounded-2xl border border-white/10 bg-slate-950/95 p-6 text-white shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur"
+                        className="w-full max-w-3xl rounded-2xl border border-white/10 bg-slate-950/95 text-white shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur"
                         onClick={(event) => event.stopPropagation()}
                     >
-                        <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start justify-between gap-4 border-b border-white/10 bg-slate-950/95 px-6 pb-4 pt-6 sm:rounded-t-2xl sm:px-8">
                             <div>
                                 <h3 className="text-2xl font-semibold">
                                     {activePost.title}
@@ -813,14 +813,26 @@ export default function BlogSection() {
                             <button
                                 type="button"
                                 onClick={() => setActivePost(null)}
-                                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white/80 transition hover:bg-white/10"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white"
                                 aria-label="Close blog dialog"
                             >
-                                ×
+                                <svg
+                                    aria-hidden="true"
+                                    viewBox="0 0 24 24"
+                                    className="h-5 w-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
                             </button>
                         </div>
 
-                        <div className="mt-6 max-h-[65vh] space-y-4 overflow-y-auto pr-2 text-sm text-white/80">
+                        <div className="max-h-[70vh] space-y-4 overflow-y-auto px-6 pb-6 text-sm text-white/80 sm:max-h-[65vh] sm:px-8">
                             {activePost.content.map((block, index) => {
                                 if (block.type === "heading") {
                                     return (

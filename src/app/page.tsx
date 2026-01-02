@@ -4,6 +4,7 @@ import BlogSection from "@/app/layouts/BlogSection";
 import ContactSection from "@/app/layouts/ContactSection";
 import ProblemStatementSection from "@/app/layouts/ProblemStatementSection";
 import KeyFeaturesSection from "@/app/layouts/KeyFeaturesSection";
+import AboutUsSection from "@/app/layouts/AboutUsSection";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
           <ProblemStatementSection/>
           <KeyFeaturesSection/>
           <BlogSection/>
+          <AboutUsSection/>
           <ContactSection/>
       </main>
     </div>
