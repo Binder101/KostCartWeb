@@ -249,7 +249,7 @@ export default function ContactUsForm() {
                             className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 focus:border-blue-400"
                             required
                         >
-                            <option value="" disabled>
+                            <option value="" disabled className="font-semibold text-white">
                                 Select state
                             </option>
                             {Object.keys(INDIA_STATE_CITIES).map((state) => (
@@ -271,7 +271,7 @@ export default function ContactUsForm() {
                             required
                             disabled={!form.state}
                         >
-                            <option value="" disabled>
+                            <option value="" disabled className="font-semibold text-white">
                                 {form.state ? "Select city" : "Select a state first"}
                             </option>
                             {(INDIA_STATE_CITIES[form.state] || []).map((city) => (
