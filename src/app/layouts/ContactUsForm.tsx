@@ -102,13 +102,12 @@ export default function ContactUsForm() {
         const restOk = form.restaurantName.trim().length >= 2;
         const stateOk = form.state.trim().length >= 2;
         const cityOk = form.city.trim().length >= 2;
-        const consentOk = form.marketingConsent;
 
         // Basic phone sanity check (server will also validate)
         const phone = form.phoneNumber.trim();
-        const phoneOk = /^[0-9+\-() ]{7,20}$/.test(phone);
+        const phoneOk = /^[0-9+\-() ]{10}$/.test(phone);
 
-        return nameOk && restOk && stateOk && cityOk && phoneOk && consentOk;
+        return nameOk && restOk && stateOk && cityOk && phoneOk;
     }, [form]);
 
     function onChange<K extends keyof FormState>(key: K, value: FormState[K]) {
@@ -177,8 +176,10 @@ export default function ContactUsForm() {
                 marketingConsent: false,
                 companyWebsite: "",
             });
-        } catch (err: any) {
-            setError(err?.message ?? "Failed to submit. Please try again.");
+        }catch (err: unknown) {
+        const message =
+            err instanceof Error ? err.message : "Failed to submit. Please try again.";
+        setError(message);
         } finally {
             setSubmitting(false);
         }
@@ -246,7 +247,7 @@ export default function ContactUsForm() {
                                 onChange("state", e.target.value);
                                 onChange("city", "");
                             }}
-                            className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 focus:border-blue-400"
+                            className="mt-1 w-full min-h-11 appearance-none rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 focus:border-blue-400"
                             required
                         >
                             <option value="" disabled className="font-semibold text-white">
@@ -267,7 +268,7 @@ export default function ContactUsForm() {
                         <select
                             value={form.city}
                             onChange={(e) => onChange("city", e.target.value)}
-                            className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 focus:border-blue-400"
+                            className="mt-1 w-full min-h-11 appearance-none rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 focus:border-blue-400"
                             required
                             disabled={!form.state}
                         >
@@ -322,7 +323,6 @@ export default function ContactUsForm() {
                                     onChange("marketingConsent", e.target.checked)
                                 }
                                 className="mt-0.5 h-4 w-4 rounded border-white/20 bg-slate-900 text-blue-500 focus:ring-2 focus:ring-blue-400"
-                                required
                             />
                             <span>
                                 I agree to receive promotional offers and news from KostCart.
