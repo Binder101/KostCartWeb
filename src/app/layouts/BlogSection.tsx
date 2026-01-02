@@ -13,7 +13,6 @@ type BlogPost = {
     excerpt: string;
     readTime: string;
     author: string;
-    likes: number;
     content: BlogContentBlock[];
 };
 
@@ -26,7 +25,6 @@ const BLOG_POSTS: BlogPost[] = [
             "Build a costing system that standardizes recipes, controls inventory, tracks vendors, and accounts for Swiggy/Zomato economics—so margins stay protected.",
         readTime: "11 min read",
         author: "Kumar Ashutosh",
-        likes: 44,
         content: [
             {
                 type: "paragraph",
@@ -190,7 +188,6 @@ const BLOG_POSTS: BlogPost[] = [
             "Food cost % is useful—but incomplete. Track contribution margin, menu mix, inventory variance, vendor trends, discounts, platform net margins, and prime cost for real profitability.",
         readTime: "10 min read",
         author: "Taaha Mirza",
-        likes: 18,
         content: [
             {
                 type: "paragraph",
@@ -306,7 +303,6 @@ const BLOG_POSTS: BlogPost[] = [
             "Global commodity swings quietly raise purchase costs. Track ingredient-level trends, strengthen vendors, re-engineer menus, and protect margins proactively.",
         readTime: "9 min read",
         author: "Nihit Kumar",
-        likes: 17,
         content: [
             {
                 type: "paragraph",
@@ -408,7 +404,6 @@ const BLOG_POSTS: BlogPost[] = [
             "Scaling breaks informal costing. Use master recipes, unit-level ingredient costs, yield factors, centralized governance, and automated reporting to stay consistent across outlets.",
         readTime: "12 min read",
         author: "Kumar Ashutosh",
-        likes: 12,
         content: [
             {
                 type: "paragraph",
@@ -510,7 +505,6 @@ const BLOG_POSTS: BlogPost[] = [
             "Pricing is perception. Use anchor items, good-better-best, smart descriptions, and visual hierarchy—backed by dish-level margins—without relying on discounts.",
         readTime: "11 min read",
         author: "Nihit Kumar",
-        likes: 21,
         content: [
             {
                 type: "paragraph",
@@ -581,7 +575,6 @@ const BLOG_POSTS: BlogPost[] = [
             "Connect sales, recipes, inventory, and purchases in real time to catch over-portioning, pilferage, and wastage early with predictive alerts.",
         readTime: "12 min read",
         author: "Kumar Ashutosh",
-        likes: 15,
         content: [
             {
                 type: "paragraph",
@@ -659,7 +652,6 @@ const BLOG_POSTS: BlogPost[] = [
             "Procurement is a profit lever. Structure contracts, maintain rate cards, audit invoices, track performance, diversify suppliers, and link vendor prices to dish margins.",
         readTime: "13 min read",
         author: "Nihit Kumar",
-        likes: 27,
         content: [
             {
                 type: "paragraph",
@@ -784,8 +776,6 @@ export default function BlogSection() {
                                 <span>{post.readTime}</span>
                                 <span aria-hidden="true">•</span>
                                 <span>{post.author}</span>
-                                <span aria-hidden="true">•</span>
-                                <span>{post.likes} likes</span>
                             </div>
                             <span className="mt-6 text-sm font-medium text-sky-200">
                                 Read more →
@@ -818,8 +808,6 @@ export default function BlogSection() {
                                     <span>{activePost.readTime}</span>
                                     <span aria-hidden="true">•</span>
                                     <span>{activePost.author}</span>
-                                    <span aria-hidden="true">•</span>
-                                    <span>{activePost.likes} likes</span>
                                 </div>
                             </div>
                             <button

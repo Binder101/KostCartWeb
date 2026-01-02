@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-radial from-indigo-900 to to-black to-55% h-screen w-screen bg-cover">
+      <body className="bg-radial from-indigo-900 to to-black to-55% h-screen w-screen bg-cover overflow-x-hidden">
         <Header />
         {children}
       </body>

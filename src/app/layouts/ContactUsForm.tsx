@@ -199,9 +199,6 @@ export default function ContactUsForm() {
                             minLength={7}
                             maxLength={20}
                         />
-                        <p className="mt-1 text-xs text-slate-400">
-                            Allowed: digits, spaces, +, -, parentheses.
-                        </p>
                     </div>
 
                     {error && (
