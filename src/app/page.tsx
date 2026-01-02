@@ -4,7 +4,6 @@ import BlogSection from "@/app/layouts/BlogSection";
 import ContactSection from "@/app/layouts/ContactSection";
 import ProblemStatementSection from "@/app/layouts/ProblemStatementSection";
 import KeyFeaturesSection from "@/app/layouts/KeyFeaturesSection";
-import BlogPage from "@/app/blog/page";
 
 export default function Home() {
   return (
