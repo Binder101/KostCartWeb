@@ -1,8 +1,12 @@
 import ContactUsForm from "@/app/layouts/ContactUsForm";
 
-export default function ContactSection() {
+type ContactSectionProps = {
+    id?: string;
+};
+
+export default function ContactSection({ id = "contact" }: ContactSectionProps) {
     return (
-        <section className="bg-black py-16 sm:py-20 lg:py-24">
+        <section id={id} className="bg-black py-16 sm:py-20 lg:py-24 scroll-mt-28">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
                     <div>

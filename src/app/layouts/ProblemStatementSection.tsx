@@ -32,16 +32,19 @@ const PAIN_POINTS: PainPoint[] = [
 ];
 
 export default function ProblemStatementSection({
-                                                    imageSrc = "/drawables/problem_section.jpg",
-                                                    imageAlt = "Restaurant kitchen scene",
-                                                }: {
+    id = "about",
+    imageSrc = "/drawables/problem_section.jpg",
+    imageAlt = "Restaurant kitchen scene",
+}: {
+    id?: string;
     imageSrc?: string;
     imageAlt?: string;
 }) {
     return (
         <section
             aria-labelledby="problem-statement-heading"
-            className="bg-black py-16 sm:py-20 lg:py-24"
+            id={id}
+            className="bg-black py-16 sm:py-20 lg:py-24 scroll-mt-28"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:items-start">

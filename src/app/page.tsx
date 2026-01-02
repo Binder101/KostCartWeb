@@ -1,5 +1,6 @@
 
 import Hero from "@/app/layouts/Hero";
+import BlogSection from "@/app/layouts/BlogSection";
 import ContactSection from "@/app/layouts/ContactSection";
 import ProblemStatementSection from "@/app/layouts/ProblemStatementSection";
 import KeyFeaturesSection from "@/app/layouts/KeyFeaturesSection";
@@ -12,6 +13,7 @@ export default function Home() {
           <Hero/>
           <ProblemStatementSection/>
           <KeyFeaturesSection/>
+          <BlogSection/>
           <ContactSection/>
       </main>
     </div>
