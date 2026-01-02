@@ -26,7 +26,7 @@ export default function Header(){
                     <a className="p-2 hover:text-amber-100 cursor-pointer" href="#home">Home</a>
                     <a className="p-2 hover:text-amber-100 cursor-pointer" href="#blog">Blog</a>
                     <a className="p-2 hover:text-amber-100 cursor-pointer" href="#features">Products</a>
-                    <a className="p-2 hover:text-amber-100 cursor-pointer" href="#about">About Us</a>
+                    <a className="p-2 hover:text-amber-100 cursor-pointer" href="#about-us">About Us</a>
                     <a className="p-2 hover:text-amber-100 cursor-pointer" href="#contact">Contact Us</a>
                 </nav>
                 <button className={`md:hidden p-3 cursor-pointer items-center group ${isMenuOpen ? 'isMenuOpen' : ''}`} onClick = {handleToggleMenu} aria-label="Toggle Menu" aria-expanded={isMenuOpen}>
@@ -61,7 +61,7 @@ export default function Header(){
                             </a>
                             <a
                                 onClick={handleNavItemClick}
-                                href="#about"
+                                href="#about-us"
                                 className="text-center py-3 px-2 text-[#F6F7D7] hover:text-amber-100 hover:bg-white/10 rounded transition-all"
                             >
                                 About Us
