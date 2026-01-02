@@ -315,21 +315,20 @@ export default function ContactUsForm() {
                     )}
 
                     <div className="rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-sm text-slate-200">
-                        <label className="flex cursor-pointer items-start gap-2">
+                        <label className="flex cursor-pointer items-center gap-2">
                             <input
                                 type="checkbox"
                                 checked={form.marketingConsent}
-                                onChange={(e) =>
-                                    onChange("marketingConsent", e.target.checked)
-                                }
-                                className="mt-0.5 h-4 w-4 rounded border-white/20 bg-slate-900 text-blue-500 focus:ring-2 focus:ring-blue-400"
+                                onChange={(e) => onChange("marketingConsent", e.target.checked)}
+                                className="h-4 w-4 shrink-0 rounded border-white/20 bg-slate-900 text-blue-500 focus:ring-2 focus:ring-blue-400"
                             />
-                            <span>
-                                I agree to receive promotional offers and news from KostCart.
-                                <span className="text-red-600"> *</span>
+                            <span className="leading-relaxed">
+                              I agree to receive promotional offers and news from KostCart
+                              <span className="text-red-600"> *</span>
                             </span>
                         </label>
                     </div>
+
 
                     <button
                         type="submit"
