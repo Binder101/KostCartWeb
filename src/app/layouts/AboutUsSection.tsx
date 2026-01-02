@@ -15,7 +15,7 @@ const founders = [
     },
     {
         name: "Kumar Ashutosh",
-        role: "Co-Founder & Operations",
+        role: "Co-Founder & Marketing",
         description: "Former multi-brand operator focused on aligning kitchen workflows with profitability.",
         image: "/team/founder-kumar-ashutosh.png",
     },
@@ -156,33 +156,34 @@ export default function AboutUsSection() {
                             </h4>
 
                             <ul className="mt-4 space-y-3 text-sm leading-relaxed text-white/70">
-                                <li className="flex gap-3">
-          <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-            ✅
-          </span>
+                                <li className="flex items-start gap-3">
+    <span className="mt-[2px] inline-flex h-6 w-6 shrink-0 items-center justify-center">
+      ✅
+    </span>
                                     <span>
-            Bring structure and transparency to restaurant costing and inventory—traditionally
-            managed via fragmented tools, manual tracking, and spreadsheets.
-          </span>
+      Bring structure and transparency to restaurant costing and inventory—traditionally
+      managed via fragmented tools, manual tracking, and spreadsheets.
+    </span>
                                 </li>
-                                <li className="flex gap-3">
-          <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-            ✅
-          </span>
+
+                                <li className="flex items-start gap-3">
+    <span className="mt-[2px] inline-flex h-6 w-6 shrink-0 items-center justify-center">
+      ✅
+    </span>
                                     <span>
-            Identify hidden losses, reduce wastage, and improve day-to-day decisions that
-            directly impact margins.
-          </span>
+      Identify hidden losses, reduce wastage, and improve day-to-day decisions that
+      directly impact margins.
+    </span>
                                 </li>
-                                <li className="flex gap-3">
-          <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-            ✅
-          </span>
-                                    <span>
-            Designed for operational workflows — not just dashboards.
-          </span>
+
+                                <li className="flex items-start gap-3">
+    <span className="mt-[2px] inline-flex h-6 w-6 shrink-0 items-center justify-center">
+      ✅
+    </span>
+                                    <span>Designed for operational workflows — not just dashboards.</span>
                                 </li>
                             </ul>
+
                         </div>
 
                         {/* Right: Who it’s for + how we build */}
@@ -190,9 +191,9 @@ export default function AboutUsSection() {
                             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">
                                 Who it’s for
                             </p>
-                            <h4 className="mt-2 text-lg font-semibold text-white">
-                                Multi-brand operators, QSRs, and cloud kitchens
-                            </h4>
+                            {/*<h4 className="mt-2 text-lg font-semibold text-white">*/}
+                            {/*    Multi-brand operators, QSRs, and cloud kitchens*/}
+                            {/*</h4>*/}
 
                             <div className="mt-4 grid gap-3 sm:grid-cols-2">
                                 {[
@@ -225,19 +226,19 @@ export default function AboutUsSection() {
                     </div>
 
                     {/* Vision (kept, but more premium) */}
-                    <div className="mt-8 rounded-2xl border border-white/10 bg-gradient-to-b from-black/10 to-black/40 p-6 sm:p-7">
+                    <div className="mt-8 rounded-2xl border border-white/10 bg-linear-to-b from-black/10 to-black/40 p-6 sm:p-7">
                         <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/60">
                             Our long-term vision is bold and clear
                         </p>
                         <p className="mt-3 text-lg font-semibold text-white sm:text-xl">
-                            to become the Tally of restaurants—the default system of record for costs, inventory,
+                            To become the Tally of restaurants—the default system of record for costs, inventory,
                             and profitability in the food business.
                         </p>
                         <p className="mt-3 text-base text-white/70">
                             Because in the next era of food-tech, profit clarity will matter more than order volume.
                         </p>
 
-                        <div className="mt-6 flex flex-wrap gap-3">
+                        <div className="mt-6 flex flex-wrap justify-between gap-3">
                             {["Profit clarity", "Inventory control", "Cost accuracy", "Wastage reduction"].map((pill) => (
                                 <span
                                     key={pill}

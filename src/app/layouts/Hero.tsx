@@ -21,9 +21,9 @@ export default function Hero() {
                     Say goodbye to leakages and unlock your full potential effortlessly.
                 </p>
                 <div className="mt-8">
-                    <button className="cursor-pointer rounded-full bg-[#2563ff] px-8 py-3 text-sm font-medium text-white shadow-[0_0_40px_rgba(37,99,255,0.55)] transition hover:bg-[#1d4fe0] animate-fade-in-up [animation-delay:240ms]">
+                    <a href="#contact" className="cursor-pointer rounded-full bg-[#2563ff] px-8 py-3 text-sm font-medium text-white shadow-[0_0_40px_rgba(37,99,255,0.55)] transition hover:bg-[#1d4fe0] animate-fade-in-up [animation-delay:240ms]">
                         Want to try KostCart ?
-                    </button>
+                    </a>
                 </div>
                 <div className="mt-16 w-full max-w-3xl animate-fade-in-up [animation-delay:240ms]">
                     <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">

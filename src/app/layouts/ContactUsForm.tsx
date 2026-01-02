@@ -192,12 +192,12 @@ export default function ContactUsForm() {
                             onChange={(e) =>
                                 onChange("phoneNumber", normalizePhone(e.target.value))
                             }
-                            placeholder="+91-95**23**67"
+                            placeholder="95**23**67"
                             className="mt-1 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-slate-100 outline-none ring-0 placeholder:text-slate-500 focus:border-blue-400"
                             required
                             pattern="^[0-9+\-() ]{7,20}$"
-                            minLength={7}
-                            maxLength={20}
+                            minLength={10}
+                            maxLength={10}
                         />
                     </div>
 

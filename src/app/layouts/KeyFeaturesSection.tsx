@@ -62,8 +62,9 @@ export default function KeyFeaturesSection({
                             key={title}
                             className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur transition hover:border-white/20 hover:bg-white/[0.07]"
                         >
-                            <div className="flex items-start gap-4">
-                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                            {/* Center everything within the card */}
+                            <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5">
                                     <Icon className="h-6 w-6 text-sky-200" aria-hidden />
                                 </div>
 
@@ -73,12 +74,13 @@ export default function KeyFeaturesSection({
                                         {description}
                                     </p>
                                 </div>
-                            </div>
 
-                            <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition group-hover:opacity-100" />
+                                <div className="mt-2 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition group-hover:opacity-100" />
+                            </div>
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );
