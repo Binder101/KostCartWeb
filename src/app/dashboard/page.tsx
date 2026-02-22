@@ -32,6 +32,13 @@ const dateLabel = (value: string) =>
     month: "short",
   });
 
+const percentageLabel = (value: number, total: number) => {
+  if (total <= 0) {
+    return "0%";
+  }
+  return `${((value / total) * 100).toFixed(1)}%`;
+};
+
 export default function DashboardPage() {
   const [selectedPlatform, setSelectedPlatform] = useState("all");
   const [selectedServiceType, setSelectedServiceType] = useState("all");
@@ -86,6 +93,55 @@ export default function DashboardPage() {
     );
   }, [filteredRecords]);
 
+  const last15DayFilteredRecords = useMemo(() => {
+    const baseFiltered = records.filter((record) => {
+      const platformMatch = selectedPlatform === "all" || record.platform === selectedPlatform;
+      const serviceTypeMatch =
+        selectedServiceType === "all" || record.serviceType === selectedServiceType;
+
+      return platformMatch && serviceTypeMatch;
+    });
+
+    return baseFiltered.slice(Math.max(baseFiltered.length - 15, 0));
+  }, [selectedPlatform, selectedServiceType]);
+
+  const leakageBreakdown = useMemo(() => {
+    return filteredRecords.reduce(
+      (acc, record) => {
+        acc.promoDiscount += record["Restaurant discount (Promo)"];
+        acc.bogoDiscount +=
+          record["Restaurant discount (BOGO, Freebies, Gold, Brand pack & others)"];
+        acc.netDeductions += record["Net Deductions\n[(C) + (D) + (E)]"];
+        return acc;
+      },
+      {
+        promoDiscount: 0,
+        bogoDiscount: 0,
+        netDeductions: 0,
+      },
+    );
+  }, [filteredRecords]);
+
+  const last15DayAggregate = useMemo(() => {
+    return last15DayFilteredRecords.reduce(
+      (acc, record) => {
+        acc.grossSales += record["Subtotal (items total)"];
+        acc.netPayable += record["Order level Payout\n(A) - (F) + (G)"];
+        acc.deductions += record["Net Deductions\n[(C) + (D) + (E)]"];
+        acc.discount +=
+          record["Restaurant discount (Promo)"] +
+          record["Restaurant discount (BOGO, Freebies, Gold, Brand pack & others)"];
+        return acc;
+      },
+      {
+        grossSales: 0,
+        netPayable: 0,
+        deductions: 0,
+        discount: 0,
+      },
+    );
+  }, [last15DayFilteredRecords]);
+
   const maxBarValue = useMemo(() => {
     const allValues = filteredRecords.flatMap((record) => [
       record["Subtotal (items total)"],
@@ -94,6 +150,51 @@ export default function DashboardPage() {
     ]);
     return Math.max(...allValues, 1);
   }, [filteredRecords]);
+
+  const chartReferenceMarks = useMemo(
+    () => [1, 0.75, 0.5, 0.25, 0].map((ratio) => ({ ratio, value: Math.round(maxBarValue * ratio) })),
+    [maxBarValue],
+  );
+
+  const leakageSegments = [
+    { label: "Promo Discounts", value: leakageBreakdown.promoDiscount, color: "#6366F1" },
+    { label: "BOGO / Freebies", value: leakageBreakdown.bogoDiscount, color: "#14B8A6" },
+    { label: "Net Deductions", value: leakageBreakdown.netDeductions, color: "#F97316" },
+  ];
+  const leakageTotal = leakageSegments.reduce((sum, segment) => sum + segment.value, 0);
+  const leakageConicGradient =
+    leakageTotal > 0
+      ? `conic-gradient(${leakageSegments
+          .reduce<{ start: number; parts: string[] }>(
+            (acc, segment) => {
+              const next = acc.start + (segment.value / leakageTotal) * 360;
+              acc.parts.push(`${segment.color} ${acc.start}deg ${next}deg`);
+              return { start: next, parts: acc.parts };
+            },
+            { start: 0, parts: [] },
+          )
+          .parts.join(", ")})`
+      : "conic-gradient(#CBD5E1 0deg 360deg)";
+
+  const aggregateSegments = [
+    { label: "Net Payable", value: last15DayAggregate.netPayable, color: "#3B82F6" },
+    { label: "Deductions", value: last15DayAggregate.deductions, color: "#10B981" },
+    { label: "Discount", value: last15DayAggregate.discount, color: "#F59E0B" },
+  ];
+  const aggregateTotal = aggregateSegments.reduce((sum, segment) => sum + segment.value, 0);
+  const aggregateConicGradient =
+    aggregateTotal > 0
+      ? `conic-gradient(${aggregateSegments
+          .reduce<{ start: number; parts: string[] }>(
+            (acc, segment) => {
+              const next = acc.start + (segment.value / aggregateTotal) * 360;
+              acc.parts.push(`${segment.color} ${acc.start}deg ${next}deg`);
+              return { start: next, parts: acc.parts };
+            },
+            { start: 0, parts: [] },
+          )
+          .parts.join(", ")})`
+      : "conic-gradient(#CBD5E1 0deg 360deg)";
 
   return (
     <main className="min-h-screen px-3 pb-10 pt-24 text-[#F6F7D7] sm:px-6 sm:pt-28 lg:px-10">
@@ -185,29 +286,39 @@ export default function DashboardPage() {
                 <span className="inline-flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-blue-500" />Net Payable</span>
                 <span className="inline-flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />Deductions</span>
               </div>
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(48px,1fr))] items-end gap-3">
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-0 flex flex-col justify-between">
+                  {chartReferenceMarks.map((mark) => (
+                    <div key={mark.ratio} className="relative border-t border-dashed border-slate-300/80">
+                      <span className="absolute -top-3 left-0 bg-white px-1 text-[10px] text-slate-500">
+                        {formatCurrency(mark.value)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(48px,1fr))] items-end gap-3 pt-2">
                 {filteredRecords.map((record) => {
                   const gross = record["Subtotal (items total)"];
                   const payable = record["Order level Payout\n(A) - (F) + (G)"];
                   const deductions = record["Net Deductions\n[(C) + (D) + (E)]"];
                   return (
-                    <div key={record.date} className="flex flex-col items-center gap-2">
+                    <div key={`${record.date}-${record.platform}-${record.serviceType}`} className="flex flex-col items-center gap-2">
                       <div className="flex h-64 items-end gap-1">
-                        <div
-                          className="w-3 rounded-t bg-indigo-500"
-                          title={`Gross ${formatCurrency(gross)}`}
-                          style={{ height: `${(gross / maxBarValue) * 100}%` }}
-                        />
-                        <div
-                          className="w-3 rounded-t bg-blue-500"
-                          title={`Net Payable ${formatCurrency(payable)}`}
-                          style={{ height: `${(payable / maxBarValue) * 100}%` }}
-                        />
-                        <div
-                          className="w-3 rounded-t bg-emerald-500"
-                          title={`Deductions ${formatCurrency(deductions)}`}
-                          style={{ height: `${(deductions / maxBarValue) * 100}%` }}
-                        />
+                        {[
+                          { label: "Gross", value: gross, color: "bg-indigo-500" },
+                          { label: "Net Payable", value: payable, color: "bg-blue-500" },
+                          { label: "Deductions", value: deductions, color: "bg-emerald-500" },
+                        ].map((bar) => (
+                          <div key={bar.label} className="group relative flex h-full items-end">
+                            <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-slate-900 px-2 py-1 text-[10px] font-medium text-white opacity-0 shadow transition group-hover:opacity-100">
+                              {bar.label}: {formatCurrency(bar.value)}
+                            </span>
+                            <div
+                              className={`w-3 rounded-t ${bar.color}`}
+                              style={{ height: `${(bar.value / maxBarValue) * 100}%` }}
+                            />
+                          </div>
+                        ))}
                       </div>
                       <p className="text-xs text-slate-600">{dateLabel(record.date)}</p>
                     </div>
@@ -215,6 +326,52 @@ export default function DashboardPage() {
                 })}
               </div>
             </div>
+          </div>
+          </div>
+
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+            <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h3 className="text-base font-semibold text-slate-900">Revenue leakage breakdown</h3>
+              <p className="text-xs text-slate-500">Dissection of major leakage heads for selected period</p>
+              <div className="mt-4 flex flex-wrap items-center gap-5">
+                <div
+                  className="h-40 w-40 rounded-full border border-slate-200"
+                  style={{ background: leakageConicGradient }}
+                />
+                <div className="space-y-2 text-sm text-slate-700">
+                  {leakageSegments.map((segment) => (
+                    <div key={segment.label} className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full" style={{ backgroundColor: segment.color }} />
+                      <span>{segment.label}</span>
+                      <span className="font-medium">{formatCurrency(segment.value)}</span>
+                      <span className="text-xs text-slate-500">({percentageLabel(segment.value, leakageTotal)})</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h3 className="text-base font-semibold text-slate-900">Last 15 days aggregate pie</h3>
+              <p className="text-xs text-slate-500">Consolidated split across all values in the last 15 days</p>
+              <div className="mt-4 flex flex-wrap items-center gap-5">
+                <div
+                  className="h-40 w-40 rounded-full border border-slate-200"
+                  style={{ background: aggregateConicGradient }}
+                />
+                <div className="space-y-2 text-sm text-slate-700">
+                  <p className="text-xs text-slate-500">Gross (15d): {formatCurrency(last15DayAggregate.grossSales)}</p>
+                  {aggregateSegments.map((segment) => (
+                    <div key={segment.label} className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full" style={{ backgroundColor: segment.color }} />
+                      <span>{segment.label}</span>
+                      <span className="font-medium">{formatCurrency(segment.value)}</span>
+                      <span className="text-xs text-slate-500">({percentageLabel(segment.value, aggregateTotal)})</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
           </div>
         </section>
       </section>
